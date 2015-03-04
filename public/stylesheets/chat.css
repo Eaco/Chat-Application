@@ -1,0 +1,44 @@
+body {
+	background-color: #CCC;
+}
+
+h1 {
+	background-color: #E0E2E4;
+	color: #000;
+	font: italic bold 32px Georgia, serif;
+	text-align: center;
+	margin: 10px auto;
+}
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #FFF;
+}
+
+.chat{
+	height:400px;
+	width: 95%;
+	margin: 0 auto;
+	overflow-y: auto;
+	border: 1px solid #BBB;
+	border-radius: 5px;
+}
+
+.chat p {
+	color: #000;
+	font-family: "Century Gothic", Ariel, Helvetica, sans-serif;
+	margin: 12px;
+	padding: 2px 8px;
+	border-radius: 3px;
+	border: 1px dashed #DAA;
+}
+/*
+.chat :nth-child(odd){
+	background-color:#2E2E2E;
+}
+.chat :nth-child(even){
+    background-color:#2B2A3D;
+}
+*/
