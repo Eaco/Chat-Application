@@ -6,14 +6,14 @@ $(document).ready(function() {
 		socket.emit('message', $('#m').val());
 		$('#m').val('');
 		return false;
-	}
-	);
+	});
 	$('#butt').click(function () {
 		socket.emit('clear');
-	}
-	);
+	});
 	socket.on('message', function(msg){
-		$("#chatbox").scrollTop($("#chatbox")[0].scrollHeight);
+		var chat = document.getElementById("chatbox");
+		if (chat.scrollHeight - chat.clientHeight <= chat.scrollTop + 4) chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+		
 		$('#chatbox').append($('<p>').text(msg));
 	});
 	socket.on('here', function(){
