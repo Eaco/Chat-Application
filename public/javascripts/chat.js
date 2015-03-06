@@ -8,7 +8,7 @@
     return false;
       }
   );
- $('#butt').click(function () {
+ $('#send').click(function () {
          socket.emit('clear');
      }
  );
