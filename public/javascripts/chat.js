@@ -3,9 +3,8 @@ $(document).ready(function() {
 
 	socket.emit('here');
 	$('form').submit(function(){
-		socket.emit('message', $('#m').val());
+		if ($('#m').val().length > 0) socket.emit('message', $('#m').val());
 		$('#m').val('');
-		return false;
 	});
 	$('#send').click(function () {
 		socket.emit('clear');
