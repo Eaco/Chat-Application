@@ -13,7 +13,7 @@ $(document).ready(function() {
 		var chat = document.getElementById("chatbox");
 		var isAtBottom = (chat.scrollHeight - chat.clientHeight <= chat.scrollTop + 4);
 		
-		$('#chatbox').append($('<div>').html($('<p>').text(msg)));
+		$('#chatbox').append($('<div>').append($('<p>').text(msg)));
 		
 		if (isAtBottom) chat.scrollTop = chat.scrollHeight - chat.clientHeight;
 	});
