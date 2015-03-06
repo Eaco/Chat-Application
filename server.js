@@ -25,5 +25,5 @@ io.sockets.on('connection', function(socket){
 });
 
 http.listen( server_port, server_ip_address, function(){
-	console.log('listening on *:3000')
+    console.log('Listening:*');
 });
