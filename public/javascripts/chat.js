@@ -1,5 +1,5 @@
  $(document).ready(function(){
-  var socket = io();
+  var socket = io.connect("http://chat-bengineering.rhcloud.com:8000");
 
   socket.emit('here');
   $('form').submit(function(){
