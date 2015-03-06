@@ -19,8 +19,10 @@ io.sockets.on('connection', function(socket){
 	socket.on('message', function(msg){
 		io.emit('message', msg);
 	});
+    socket.on('clear', function () {
+        io.emit('clearing');
+    })
 });
-
 
 http.listen( server_port, server_ip_address, function(){
 	console.log('listening on *:3000')
