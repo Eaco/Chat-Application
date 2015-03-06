@@ -26,19 +26,15 @@ h1 {
 	border-radius: 5px;
 }
 
-.chat p {
-	color: #000;
-	font-family: "Century Gothic", Ariel, Helvetica, sans-serif;
-	margin: 12px;
-	padding: 2px 8px;
-	border-radius: 3px;
-	border: 1px dashed #DAA;
-}
-/*
-.chat :nth-child(odd){
-	background-color:#2E2E2E;
-}
-.chat :nth-child(even){
-    background-color:#2B2A3D;
-}
-*/
+	.chat p {
+		color: #000;
+		font-family: "Century Gothic", Ariel, Helvetica, sans-serif;
+		margin: 12px;
+		padding: 2px 8px;
+		border-radius: 3px;
+		border: 1px dashed #DAA;
+		max-width: 80%;
+	}
+
+		.chat p:nth-child(even) {
+		}

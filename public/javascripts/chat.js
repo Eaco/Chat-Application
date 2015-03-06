@@ -12,9 +12,11 @@ $(document).ready(function() {
 	});
 	socket.on('message', function(msg){
 		var chat = document.getElementById("chatbox");
-		if (chat.scrollHeight - chat.clientHeight <= chat.scrollTop + 4) chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+		var isAtBottom = (chat.scrollHeight - chat.clientHeight <= chat.scrollTop + 4);
 		
 		$('#chatbox').append($('<p>').text(msg));
+		
+		if (isAtBottom) chat.scrollTop = chat.scrollHeight - chat.clientHeight;
 	});
 	socket.on('here', function(){
 		$('#chatbox').append($('<p>USER CONNECTED</p>'));
