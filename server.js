@@ -49,6 +49,8 @@ io.sockets.on('connection', function(socket){
 });
 
 function sqlMessage(msg) {
+    msg.replace("'", "\'");
+    msg.replace("\\", "\\\\")
     connection.query('INSERT INTO `Messages`(`Time`, `Message`) VALUES ( NOW(), \'' + msg + '\')', function(err, rows, fields){
         if(err) throw err;
     });
