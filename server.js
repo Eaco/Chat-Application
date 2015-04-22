@@ -40,7 +40,7 @@ io.sockets.on('connection', function(socket){
 	});
 	socket.on('message', function(msg){
 		io.emit('message', msg);
-        sqlMessage(msg);
+		sqlMessage(msg);
 	});
     socket.on('clear', function () {
         io.emit('clearing');
