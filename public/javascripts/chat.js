@@ -1,15 +1,15 @@
 $(document).ready(function() {
 	var socket = io.connect("/");
 
-	socket.emit('here');
+	socket.emit('newuser');
 	$('form').submit(function(){
-		if ($('#m').val().length > 0) {
+		if ($('#send').val().length > 0) {
 			socket.emit('message', $('#m').val());
-			$('#m').val('');
+			$('#send').val('');
 		}
 		return false;
 	});
-	$('#send').click(function () {
+	$('#clear').click(function () {
 		socket.emit('clear');
 	});
 	socket.on('message', function(msg){
@@ -20,7 +20,7 @@ $(document).ready(function() {
 		
 		if (isAtBottom) chat.scrollTop = chat.scrollHeight - chat.clientHeight;
 	});
-	socket.on('here', function(){
+	socket.on('newuser', function(){
 		$('#chatbox').append($('<p>USER CONNECTED</p>'));
 	});
 	socket.on('clearing', function () {

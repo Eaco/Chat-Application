@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
     host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
     user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME,
     password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
-    database : 'nodesocketapp',
+    database : 'nodesocketapp',\
     socket   : process.env.OPENSHIFT_MYSQL_DB_SOCKET,
     port     : process.env.OPENSHIFT_MYSQL_DB_PORT
 });
@@ -35,8 +35,8 @@ io.sockets.on('connection', function(socket){
             socket.emit('message', msg[i].Message);
         }
     });
-	socket.on('here', function(){
-		socket.broadcast.emit('here');
+	socket.on('newuser', function(){
+		socket.broadcast.emit('newuser');
 	});
 	socket.on('message', function(msg){
 		io.emit('message', msg);
