@@ -5,8 +5,29 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var mysql = require('mysql');
 
+var connection = mysql.createConnection({
+    host     : process.env.OPENSHIFT_MYSQL_DB_HOST||'localhost',
+    user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME||'root',
+    password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD||'',
+    database : 'test',//TODO: change schema name
+    socket   : process.env.OPENSHIFT_MYSQL_DB_SOCKET,
+    port     : process.env.OPENSHIFT_MYSQL_DB_PORT||3306
+});
 
+connection.connect(function(err, conn) {
+    if(err) {
+        console.log('MySQL connection error: ', err);
+        process.exit(1);
+    }
+
+});
+
+connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields){
+        if(err) throw err;
+        console.log(rows[0].solution);
+    });
 
 server.listen( server_port, server_ip_address, function(){
     console.log('Server listening at port %d at address %s', server_port, server_ip_address);
