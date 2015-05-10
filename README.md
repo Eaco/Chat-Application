@@ -1,2 +1,15 @@
 # NodeJsApplication
-A so far less simple chat application by Eaco and Tclokie. And it will always be an applictaion in my heart.
+
+A simple chat application using socket.io
+
+## How to use
+
+```
+$ cd NodeJsApplication
+$ npm install
+$ node .
+```
+
+And point your browser to `http://localhost:8080`. 
+
+
