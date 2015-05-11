@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
     host     : process.env.OPENSHIFT_MYSQL_DB_HOST||'localhost',
     user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME||'root',
     password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD||'',
-    database : 'test',//TODO: change schema name
+    database : 'SocketChat',
     socket   : process.env.OPENSHIFT_MYSQL_DB_SOCKET,
     port     : process.env.OPENSHIFT_MYSQL_DB_PORT||3306
 });
@@ -48,11 +48,13 @@ io.on('connection', function (socket) {
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
+    console.log(data);
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
       username: socket.username,
-      message: data,
-      usernamecolor: socket.usernamecolor
+      usernamecolor: socket.usernamecolor,
+      message: data.message,
+      timestamp: data.timestamp
     });
   });
 

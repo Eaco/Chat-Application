@@ -1,11 +1,6 @@
 $(function() {
   var FADE_TIME = 150; // ms
   var TYPING_TIMER_LENGTH = 400; // ms
-  var COLORS = [
-    '#91580f','#e21400',  '#f8a700', '#f78b00',
-    '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
-    '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
-  ];
 
   // Initialize varibles
   var $window = $(window);
@@ -54,19 +49,21 @@ $(function() {
 
   // Sends a chat message
   function sendMessage () {
-    var message = $inputMessage.val();
+    var Message = $inputMessage.val();
     // Prevent markup from being injected into the message
-    message = cleanInput(message);
+    Message = cleanInput(Message);
+    Timestamp = getTimeStamp();
     // if there is a non-empty message and a socket connection
-    if (message && connected) {
+    if (Message && connected) {
       $inputMessage.val('');
       addChatMessage({
         username: userName,
         usernamecolor: usernameColor,
-        message: message,
+        message: Message,
+        timestamp: Timestamp,
       });
       // tell server to execute 'new message' and send along one parameter
-      socket.emit('new message', message);
+      socket.emit('new message', {message:Message, timestamp:Timestamp});
     }
   }
 
@@ -87,8 +84,10 @@ $(function() {
     }
 
     var $usernameDiv = $('<span class="username"/>')
-      .text(data.username)
+      .text(data.username+':')
       .css('color', data.usernamecolor);
+    var $messageTimeDiv = $('<span class="messageTime">')
+      .text(data.timestamp);
     var $messageBodyDiv = $('<span class="messageBody">')
       .text(data.message);
 
@@ -96,7 +95,7 @@ $(function() {
     var $messageDiv = $('<li class="message"/>')
       .data('username', data.username)
       .addClass(typingClass)
-      .append($usernameDiv, $messageBodyDiv);
+      .append($messageTimeDiv, $usernameDiv,  $messageBodyDiv);
 
     addMessageElement($messageDiv, options);
   }
@@ -179,12 +178,29 @@ $(function() {
   }
 
   // Gets the color of a username through our hash function
-  function getUsernameColor () {
-   
+  function getUsernameColor () { 
     // Compute random color
-    
-    return '#'+Math.floor(Math.random()*16777215).toString(16);
+    // use Wes Johnson's implementation of Martin Ankerl's method
+  var color = new RColor;
+    return color.get(true);
   }
+
+    // Gets the timestamp of the message
+  function getTimeStamp () { 
+    //var time = Math.floor(Date.now() / 1000);
+    var date = new Date(Date.now());
+    var h = addZero(date.getHours());
+    var m = addZero(date.getMinutes());
+    var s = addZero(date.getSeconds());
+    return '['+ h+':'+ m+':'+ s+']';
+  }
+
+  function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 
   // Keyboard events
 
