@@ -9,7 +9,7 @@
     "openshift"
   ],
     "scripts": {
-  "start": "node server.js"
+  "start": "node index.js"
 	},
   "author": {
     "name": "OpenShift",
@@ -36,5 +36,5 @@
   "bundleDependencies": [],
 
   "private": true,
-  "main": "server.js"
+  "main": "index.js"
 }

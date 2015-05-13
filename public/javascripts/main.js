@@ -4,18 +4,21 @@ $(function() {
 
   // Initialize varibles
   var $window = $(window);
-  var $usernameInput = $('.usernameInput'); // Input for username
+  var $usernameInput = $('#usernameInput'); // Input for username
   //var $roomInput = $('.roomInput'); // Input for username
   var $messages = $('.messages'); // Messages area
-  var $inputMessage = $('.inputMessage'); // Input message input box
+  var $inputMessage = $("#inputMessage"); // Input message input box
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
 
+  var $chatRoomInput = $('#chatRoomList'); // The input for chatroom selection i.e dropdown
+  var $setChatRoom = $('#setChatRoom');  //The trigger/button for setting chatroom
+
   // Prompt for setting a username
-  var userName;
-  var Room;
-  var usernameColor = getUsernameColor();
+  var c_userName;
+  var c_room;
+  var c_usernameColor = getUsernameColor();
   var connected = false;
   var typing = false;
   var lastTypingTime;
@@ -35,17 +38,17 @@ $(function() {
 
   // Sets the client's username
   function setUsername () {
-    userName = cleanInput($usernameInput.val().trim());
+    c_userName = cleanInput($usernameInput.val().trim());
 
     // If the username is valid
-    if (userName) {
+    if (c_userName) {
       $loginPage.fadeOut();
       $chatPage.show();
       $loginPage.off('click');
       $currentInput = $inputMessage.focus();
 
       // Tell the server your username
-      socket.emit('add user', {username:userName, usernamecolor:usernameColor});
+      socket.emit('add user', {username:c_userName, usernamecolor:c_usernameColor});
     }
   }
 
@@ -59,8 +62,8 @@ $(function() {
     if (Message && connected) {
       $inputMessage.val('');
       addChatMessage({
-        username: userName,
-        usernamecolor: usernameColor,
+        username: c_userName,
+        usernamecolor: c_usernameColor,
         message: Message,
         timestamp: Timestamp,
       });
@@ -213,7 +216,7 @@ $(function() {
     }
     // When the client hits ENTER on their keyboard
     if (event.which === 13) {
-      if (userName) {
+      if (c_userName) {
         sendMessage();
         socket.emit('stop typing');
         typing = false;
@@ -239,6 +242,11 @@ $(function() {
     $inputMessage.focus();
   });
 
+  //update client room choices
+  $setChatRoom.click(function () {
+    c_room = $chatRoomInput.val();
+    socket.emit('set room', c_room);
+  });
   // Socket events
 
   // Whenever the server emits 'login', log the login message

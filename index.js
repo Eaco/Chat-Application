@@ -24,11 +24,6 @@ connection.connect(function(err, conn) {
 
 });
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields){
-        if(err) throw err;
-        console.log(rows[0].solution);
-    });
-
 server.listen( server_port, server_ip_address, function(){
     console.log('Server listening at port %d at address %s', server_port, server_ip_address);
 
@@ -45,16 +40,16 @@ var numUsers = 0;
 
 io.on('connection', function (socket) {
   var addedUser = false;
-  console.log(socket);
+  //console.log(socket);
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
     console.log(data);
     // we tell the client to execute 'new message'
-    socket.broadcast.emit('new message', {
+    socket.to(socket.room).emit('new message', {
       username: socket.username,
       usernamecolor: socket.usernamecolor,
       message: data.message,
-      timestamp: data.timestamp
+      timestamp: data.timestamp,
     });
   });
 
@@ -64,6 +59,8 @@ io.on('connection', function (socket) {
     // we store the username in the socket session for this client
     socket.username = user.username;
     socket.usernamecolor = user.usernamecolor;
+    socket.room = 'lobby';
+    socket.join(socket.room);
     // add the client's username to the global list
     usernames[user.username] = user.username;
     ++numUsers;
@@ -79,6 +76,13 @@ io.on('connection', function (socket) {
     });
   });
 
+// when the client emits 'set room', this listens and executes
+  socket.on('set room', function (room) {
+    console.log(room);
+    socket.leave(socket.room);
+    socket.room = room;
+    socket.join(room);
+  });
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
     socket.broadcast.emit('typing', {
@@ -95,6 +99,7 @@ io.on('connection', function (socket) {
 
   // when the user disconnects.. perform this
   socket.on('disconnect', function () {
+    console.log("user left");
     // remove the username from global usernames list
     if (addedUser) {
       delete usernames[socket.username];
