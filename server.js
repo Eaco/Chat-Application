@@ -6,24 +6,16 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var mysql = require('mysql');
+var mongoose = require('mongoose');
+var connectionString = connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+process.env.OPENSHIFT_APP_NAME;
 
-var connection = mysql.createConnection({
-    host: process.env.OPENSHIFT_MYSQL_DB_HOST || 'localhost',
-    user: process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
-    password: process.env.OPENSHIFT_MYSQL_DB_PASSWORD || '',
-    database: 'socketchat',
-    socket: process.env.OPENSHIFT_MYSQL_DB_SOCKET,
-    port: process.env.OPENSHIFT_MYSQL_DB_PORT || 3306
-});
+mongoose.connect(connectionString);
 
-connection.connect(function(err, conn) {
-    if (err) {
-        console.log('MySQL connection error: ', err);
-        process.exit(1);
-    }
-
-});
+var Message = mongoose.model('Message', { User: String, content: String});
 
 server.listen(server_port, server_ip_address, function() {
     console.log('Server listening at port %d at address %s', server_port, server_ip_address);
@@ -73,11 +65,16 @@ io.on('connection', function(socket) {
     socket.on('new message', function(data) {
         console.log(data);
         // we tell the client to execute 'new message'
+        var message = new Message({user:socket.username, content:data.message});
+        message.save(function (err) {
+            if (err) // ...
+                console.log('Failed to save message in DB, sending to room...' + err);
+        });
         socket.to(socket.room).emit('new message', {
             username: socket.username,
             usernamecolor: socket.usernamecolor,
             message: data.message,
-            timestamp: data.timestamp,
+            timestamp: data.timestamp
         });
     });
     // when the client emits 'set room', this listens and executes
