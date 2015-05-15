@@ -2,6 +2,7 @@
 A simple chat application using socket.io
 
 ## How to use
+Please install node.js first, then in terminal/command line
 
 ```
 $ cd NodeJsApplication
