@@ -10,7 +10,7 @@ var mysql = require('mysql');
 
 var connection = mysql.createConnection({
     host: process.env.OPENSHIFT_MYSQL_DB_HOST || 'localhost',
-    user: process.env.OPENSHIFT_MYSQL_DB_username || 'root',
+    user: process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
     password: process.env.OPENSHIFT_MYSQL_DB_PASSWORD || '',
     database: 'socketchat',
     socket: process.env.OPENSHIFT_MYSQL_DB_SOCKET,
