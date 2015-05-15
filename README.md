@@ -1,7 +1,7 @@
 
 A simple chat application using socket.io
 
-+## How to use
+## How to use
 
 ```
 $ cd NodeJsApplication
