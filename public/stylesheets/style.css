@@ -35,7 +35,7 @@ body
 ul
 {
     list-style: none;
-
+	padding-left:0;
     word-wrap: break-word;
 }
 
@@ -62,6 +62,7 @@ ul
 .login.page
 {
     background-color: #000;
+	display: none;
 }
 
 .login.page .form
@@ -114,7 +115,7 @@ ul
 .chat.page
 {
 	width: 100%;
-    display: none;
+    /*display: none;*/
 }
 
 .container {
@@ -166,13 +167,6 @@ ul
 	float: left;
 }
 
-.chat.room
-{
-	height:100%;
-	width: 20%;
-	float: left;
-	background-color: #006666;
-}
 .chatArea
 {
 	background-color: #ffffff;
@@ -213,6 +207,50 @@ ul
 
     text-align: right;
 }
+/*chat room */
+
+
+a.chatRoom:link,a.chatRoom:visited {
+			list-style:none;
+            opacity: 0.4;
+			display:block;
+			width:100%;
+			font-size:15px;
+			font-weight:bold;
+			color:#135884;
+			background-color:#ffffff;
+			text-align:center;
+			padding:10px;
+			text-decoration:none;
+			text-transform:uppercase;
+}
+a.chatRoom:hover,a.chatRoom:active {
+            opacity: 0.8;
+			background-color:#B6DAFF;
+			color:#135884;
+}
+
+.searchChatRoom
+{
+	font-size:16px;
+	color:#ffffff;
+	font-weight:bold;
+	width: 100%;
+	padding:15px;
+	background: linear-gradient( #996600, #ffcc00);
+	background-color: #996600;
+	outline: none;
+	border: none;
+	opacity: 0.9;
+}
+.chat.room
+{
+	height:100%;
+	width: 20%;
+	float: left;
+	background-color: #135884;
+}
+
 
 /* Input */
 

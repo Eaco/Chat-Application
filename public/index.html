@@ -18,11 +18,17 @@
       <input class="inputMessage" id="inputMessage" placeholder="Type here..."/>
 	  </div>
 	  <div class="chat room">
-      <select id="chatRoomList">
-        <option value="CS350">CS350</option>
+	  <input class="searchChatRoom" id="searchChatRoom" placeholder="Search Chat Room..."/>
+	  <ul class="chatRoomList">
+			<li><a id="chatRoom" data-id="CS350" class="chatRoom" href="javascript:void(0)">CS350</a></li>
+			<li><a id="chatRoom" data-id="MC2035" class="chatRoom" href="javascript:void(0)">MC2035</a></li>
+	  </ul>
+      <!--<select  id="chatRoomList">
+		<option selected>Search Chat Room...</option>
+		<option value="CS350">CS350</option>
         <option value="MC2035">MC2035</option>
       </select>
-      <button type="button" id="setChatRoom">Set</button>
+      <button type="button" id="setChatRoom">Set</button>-->
 	  </div>
 	 </div>
     </li>

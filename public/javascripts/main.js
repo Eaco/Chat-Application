@@ -260,11 +260,16 @@ $(function() {
     });
 
     //update client room choices
-    $setChatRoom.click(function() {
+    /*$setChatRoom.click(function() {
         c_room = $chatRoomInput.val();
         clearMessage();
         socket.emit('change room', c_room);
-    });
+    });*/
+	$('.chatRoom').on('click', function() {
+		c_room = $(this).data("id");
+        clearMessage();
+        socket.emit('change room', c_room);
+	});
 
     // Socket events
 
