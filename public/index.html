@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO Chat Example</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+  <ul class="pages">
+    <li class="chat page">
+	<div class="container">
+	  <div class="acctinfo">
+	  </div>
+	  <div class="chat">
+      <div class="chatArea">
+        <ul class="messages"></ul>
+      </div>
+      <input class="inputMessage" id="inputMessage" placeholder="Type here..."/>
+	  </div>
+	  <div class="chat room">
+	  <input class="searchChatRoom" id="searchChatRoom" placeholder="Search Chat Room..."/>
+	  <ul class="chatRoomList">
+			<li><a id="chatRoom" data-id="CS350" class="chatRoom" href="javascript:void(0)">CS350</a></li>
+			<li><a id="chatRoom" data-id="MC2035" class="chatRoom" href="javascript:void(0)">MC2035</a></li>
+	  </ul>
+      <!--<select  id="chatRoomList">
+		<option selected>Search Chat Room...</option>
+		<option value="CS350">CS350</option>
+        <option value="MC2035">MC2035</option>
+      </select>
+      <button type="button" id="setChatRoom">Set</button>-->
+	  </div>
+	 </div>
+    </li>
+    <li class="login page">
+      <div class="form">
+        <h3 class="title">What's your nickname?</h3>
+        <input class="usernameInput" id="usernameInput" type="text" maxlength="14" />
+      </div>
+    </li>
+  </ul>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="javascripts/main.js"></script>
+  <script src="javascripts/rcolor.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+/* Fix user-agent */
+
+*
+{
+    box-sizing: border-box;
+}
+
+html
+{
+    font-weight: 300;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+html,
+input
+{
+    font-family: 'HelveticaNeue-Light',
+    'Helvetica Neue Light',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    'Lucida Grande',
+    sans-serif;
+}
+
+html,
+body
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+ul
+{
+    list-style: none;
+	padding-left:0;
+    word-wrap: break-word;
+}
+
+/* Pages */
+
+.pages
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.page
+{
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+}
+
+/* Login Page */
+
+.login.page
+{
+    background-color: #000;
+	display: none;
+}
+
+.login.page .form
+{
+    position: absolute;
+    top: 50%;
+
+    width: 100%;
+    height: 100px;
+    margin-top: -100px;
+
+    text-align: center;
+}
+
+.login.page .form .usernameInput
+{
+    width: 400px;
+    padding-bottom: 15px;
+
+    text-align: center;
+
+    border: none;
+    border-bottom: 2px solid #fff;
+    outline: none;
+    background-color: transparent;
+}
+
+.login.page .title
+{
+    font-size: 200%;
+}
+
+.login.page .usernameInput
+{
+    font-size: 200%;
+
+    letter-spacing: 3px;
+}
+
+.login.page .title,
+.login.page .usernameInput
+{
+    font-weight: 100;
+
+    color: #fff;
+}
+
+/* Chat page */
+
+.chat.page
+{
+	width: 100%;
+    /*display: none;*/
+}
+
+.container {
+	width: 100%;
+	height: 100vh;
+	background-color: #F0F0F0;
+	overflow: hidden; 
+}
+
+/* account info */
+
+.acctinfo {
+	float: left;
+	height: 100%;
+	width: 20%;
+	background-color: #93A5C4;
+	
+}
+
+/* Font */
+
+.messages
+{
+    font-size: 150%;
+}
+
+.inputMessage
+{
+    font-size: 100%;
+}
+
+.log
+{
+    font-size: 70%;
+
+    margin: 5px;
+
+    text-align: center;
+
+    color: gray;
+}
+
+/* Messages */
+
+.chat 
+{
+	height:100%;
+	width: 60%;
+	float: left;
+}
+
+.chatArea
+{
+	background-color: #ffffff;
+    height: 91%;
+    padding-bottom: 0px;
+	overflow: hidden;
+}
+
+.messages
+{
+    /*overflow-y: scroll;*/
+	overflow: auto;
+    height: 100%;
+    margin: 0;
+    padding: 10px 20px 10px 20px;
+}
+
+.message.typing .messageBody
+{
+    color: gray;
+}
+
+.messageTime
+{
+    float: left;
+    padding-right: 5px;
+    color: gray;
+}
+
+.username
+{
+    font-weight: 700;
+
+    float: left;
+    overflow: hidden;
+
+    padding-right: 15px;
+
+    text-align: right;
+}
+/*chat room */
+
+
+a.chatRoom:link,a.chatRoom:visited {
+			list-style:none;
+            opacity: 0.4;
+			display:block;
+			width:100%;
+			font-size:15px;
+			font-weight:bold;
+			color:#135884;
+			background-color:#ffffff;
+			text-align:center;
+			padding:10px;
+			text-decoration:none;
+			text-transform:uppercase;
+}
+a.chatRoom:hover,a.chatRoom:active {
+            opacity: 0.8;
+			background-color:#B6DAFF;
+			color:#135884;
+}
+
+.searchChatRoom
+{
+	font-size:16px;
+	color:#ffffff;
+	font-weight:bold;
+	width: 100%;
+	padding:15px;
+	background: linear-gradient( #996600, #ffcc00);
+	background-color: #996600;
+	outline: none;
+	border: none;
+	opacity: 0.9;
+}
+.chat.room
+{
+	height:100%;
+	width: 20%;
+	float: left;
+	background-color: #135884;
+}
+
+
+/* Input */
+
+.inputMessage
+{
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 60px;
+    padding-left: 10px;
+
+    border: 10px solid #000;
+    outline: none;
+}
