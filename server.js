@@ -1,5 +1,6 @@
 #!/bin/env node
  // Setup basic express server
+var fs = require('fs');
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -12,10 +13,24 @@ process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
 process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
 process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
 process.env.OPENSHIFT_APP_NAME;
+connectionString = connection_string = process.env.OPENSHIFT_MONGODB_DB_HOST ? connectionString : "mongodb://localhost/test"
 
-mongoose.connect(process.env.OPENSHIFT_MONGODB_DB_HOST ? connectionString : "mongodb://localhost/test");
+// Connect to mongodb
+var connect = function () {
+  var options = { server: { socketOptions: { keepAlive: 1 } } };
+  mongoose.connect(connectionString, options);
+};
+connect();
 
-var Message = mongoose.model('Message', { User: String, content: String});
+mongoose.connection.on('error', console.log);
+mongoose.connection.on('disconnected', connect);
+
+// Bootstrap models
+fs.readdirSync(__dirname + '/models').forEach(function (file) {
+  if (~file.indexOf('.js')) require(__dirname + '/models/' + file);
+});
+
+var Message = mongoose.model('Message');
 
 server.listen(server_port, server_ip_address, function() {
     console.log('Server listening at port %d at address %s', server_port, server_ip_address);
